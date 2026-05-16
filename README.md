@@ -80,9 +80,3 @@ Test prerequisites:
 - model/API credentials must already be configured for Pi.
 - `jq` must be installed.
 
-## Published Files
-
-The package currently publishes only:
-
-- `index.ts`
-- `package.json`

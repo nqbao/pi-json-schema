@@ -4,6 +4,9 @@
   "description": "Pi extension for validating and writing structured JSON output against a JSON Schema.",
   "license": "MIT",
   "type": "module",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "index.ts"
   ],
