@@ -6,6 +6,10 @@
     "pi-package"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nqbao/pi-json-schema"
+  },
   "type": "module",
   "publishConfig": {
     "access": "public"

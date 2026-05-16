@@ -1,8 +1,10 @@
 # @nqbao/pi-json-schema
 
-`@nqbao/pi-json-schema` is a Pi extension that enforces structured JSON output against a caller-provided JSON Schema.
+`@nqbao/pi-json-schema` is a Pi extension designed for **headless runs and automation workflows**. It enforces structured JSON output against a caller-provided JSON Schema, validates it with `ajv`, and writes the result to a file — without requiring an interactive session.
 
-It registers a `json_output` tool, validates the final payload with `ajv`, and writes the validated JSON to a file. If the tool is not called, it can optionally attempt one fallback extraction pass from the last assistant message.
+This extension is ideal for scripted pipelines, CI/CD integration, and any scenario where you need reliable, schema-validated JSON output from Pi without manual inspection. By enforcing a strict schema and writing to a predictable file, it gives you **deterministic, machine-readable output** that other tools can consume — making Pi much easier to chain with shell scripts, API gateways, ETL pipelines, or any automation tooling.
+
+It registers a `json_output` tool that the agent calls to produce structured data, validates the final payload on session shutdown, and writes the validated JSON to disk. If the tool is never called, it can optionally attempt one fallback extraction pass from the last assistant message.
 
 ## Install
 
@@ -14,7 +16,7 @@ pi install npm:@nqbao/pi-json-schema
 
 ## Usage
 
-After installation, the extension is available automatically:
+After installation, the extension is available automatically. Using `-p` (or `--prompt`) runs Pi in headless mode, making this a fully automated, non-interactive extraction — ideal for scripts and pipelines:
 
 ```bash
 pi -p "Extract company name and revenue from: Acme Corp reported 5 million dollars in revenue last quarter" \
