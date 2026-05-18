@@ -136,10 +136,13 @@ export default function structuredOutputExtension(pi: ExtensionAPI) {
 	pi.on("session_shutdown", async (_event, ctx) => {
 		try {
 			const fallbackMode = pi.getFlag("json-fallback") ?? "best-effort";
+			if (!["best-effort", "force", "none"].includes(String(fallbackMode))) {
+				fail(`invalid --json-fallback value "${fallbackMode}". Valid: best-effort, force, none`);
+			}
 			if (toolCalled || !schema || !outputPath) return;
 
-			// Take last output
-			const entries = ctx.sessionManager.getEntries();
+			const entries = ctx.sessionManager?.getEntries();
+			if (!entries) return;
 			let lastOutput = "";
 			for (let i = entries.length - 1; i >= 0; i--) {
 				const entry = entries[i] as { type: string; message?: { role?: string; content?: unknown } };
